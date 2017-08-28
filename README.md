@@ -8,3 +8,16 @@
 ## SprayShooter
 * Type : Component
 * This component fire the spray.
+
+## PaintPool
+* Type : Component
+* This component managing paintmover pool.
+
+## PaintMover
+* Type : Component
+* This component move paint.
+
+---
+
+## ALLog
+* Type : Static class
