@@ -5,6 +5,9 @@ using UnityEngine;
 public class SprayShooter : MonoBehaviour {
 
 	[SerializeField]
+	private PaintPool _pool;
+
+	[SerializeField]
 	private Transform _firePosition;
 
 	[SerializeField]
@@ -25,7 +28,9 @@ public class SprayShooter : MonoBehaviour {
 			if (Input.GetMouseButton(0))
 			{
 				// fire code
-				
+				PaintMover temp = _pool.GetPaint();
+				temp.SetPaint(_rotator.currentAngle);
+				temp.gameObject.SetActive(true);
 				yield return new WaitForSeconds(_fireDelay);
 			}
 			yield return null;
