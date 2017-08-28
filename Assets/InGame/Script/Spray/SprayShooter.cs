@@ -27,7 +27,6 @@ public class SprayShooter : MonoBehaviour {
 		{
 			if (Input.GetMouseButton(0))
 			{
-				// fire code
 				PaintMover temp = _pool.GetPaint();
 				temp.SetPaint(_rotator.currentAngle);
 				temp.gameObject.SetActive(true);
