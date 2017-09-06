@@ -8,8 +8,10 @@ public class SprayRotator : MonoBehaviour {
 	public float currentAngle { get {return _currentAngle;} }
 
 	private const float _correctionvalue = Mathf.Deg2Rad * 90f;
+	private Vector3 _scale;
 
 	private void Start () {
+		_scale = transform.localScale;
 		_currentAngle = 0;
 	}
 
@@ -27,6 +29,10 @@ public class SprayRotator : MonoBehaviour {
 
 	public void SetRotationZ(float z)
 	{
-		transform.localRotation = Quaternion.Euler(0f, 0f, z);
+		float targetZ = z + 90f;
+		float value = (targetZ > 90f && targetZ < 270f) ? -1f : 1f;
+
+		transform.localScale = new Vector3(_scale.x, value * _scale.y, _scale.z);
+		transform.localRotation = Quaternion.Euler(0f, 0f, targetZ);
 	}
 }
