@@ -27,12 +27,18 @@ public class SprayShooter : MonoBehaviour {
 		{
 			if (Input.GetMouseButton(0))
 			{
-				PaintMover temp = _pool.GetPaint();
-				temp.SetPaint(_rotator.currentAngle);
-				temp.gameObject.SetActive(true);
+				SetPaint();
 				yield return new WaitForSeconds(_fireDelay);
 			}
 			yield return null;
 		}
+	}
+
+	private void SetPaint()
+	{
+		PaintMover temp = _pool.GetPaint();
+		temp.SetPaint(_rotator.currentAngle);
+		temp.gameObject.SetActive(true);
+		temp.transform.position = _firePosition.position;
 	}
 }
