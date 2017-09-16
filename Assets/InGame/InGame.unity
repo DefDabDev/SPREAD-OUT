@@ -306,6 +306,10 @@ GameObject:
   - component: {fileID: 365891181}
   - component: {fileID: 365891184}
   - component: {fileID: 365891183}
+  - component: {fileID: 365891188}
+  - component: {fileID: 365891187}
+  - component: {fileID: 365891186}
+  - component: {fileID: 365891185}
   m_Layer: 5
   m_Name: Chracter
   m_TagString: Untagged
@@ -410,6 +414,75 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &365891185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 365891179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8949726a70eb842d6b5b9c6e173f7285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _state: 1
+  _stateName: JumpState
+--- !u!114 &365891186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 365891179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 311fa9e9c0e274ec8a765a43e5e075c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _state: 1
+  _stateName: RunState
+--- !u!114 &365891187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 365891179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32880171c849848679492335850a32cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animationState:
+  - name: Idle
+    fps: 0
+    isLoop: 0
+    clips:
+    - {fileID: 21300094, guid: 4c1a770638359485aaca30195ba78011, type: 3}
+  - name: Run
+    fps: 0.07
+    isLoop: 1
+    clips:
+    - {fileID: 21300106, guid: 4c1a770638359485aaca30195ba78011, type: 3}
+    - {fileID: 21300108, guid: 4c1a770638359485aaca30195ba78011, type: 3}
+  - name: Jump
+    fps: 0
+    isLoop: 0
+    clips:
+    - {fileID: 21300098, guid: 4c1a770638359485aaca30195ba78011, type: 3}
+--- !u!114 &365891188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 365891179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51c119c39a0f446ef95053adfdfb4fac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _states:
+  - {fileID: 365891185}
+  - {fileID: 365891186}
+  _currentStateName: 
 --- !u!1 &369191821
 GameObject:
   m_ObjectHideFlags: 0
