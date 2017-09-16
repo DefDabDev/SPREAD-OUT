@@ -39,7 +39,7 @@ public class Character : MonoBehaviour {
     {
         ChangeState(GetState(name));
     }
-
+    
     public void ChangeState(State state)
     {
         if (_currentState != null)
