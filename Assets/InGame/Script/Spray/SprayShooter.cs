@@ -36,9 +36,7 @@ public class SprayShooter : MonoBehaviour {
 
 	private void SetPaint()
 	{
-		PaintMover temp = _pool.GetPaint();
-		temp.SetPaint(_rotator.currentAngle);
-		temp.gameObject.SetActive(true);
-		temp.transform.position = _firePosition.position;
+		Paint temp = _pool.GetPaint();
+		temp.SetPaint(_rotator.currentAngle, _firePosition.position);
 	}
 }

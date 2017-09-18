@@ -726,7 +726,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pool: {fileID: 1346056469}
   _firePosition: {fileID: 773663748}
-  _fireDelay: 0.2
+  _fireDelay: 0.1
 --- !u!1 &1346056467
 GameObject:
   m_ObjectHideFlags: 0
@@ -820,7 +820,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dc7eb5815d64d94590f75f5e359bab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileObj: {fileID: 1783460767298890, guid: 06259d61a1159e34380a127bf3eb757d, type: 2}
+  _testFileName: test
+  tileObj: {fileID: 1783460767298890, guid: 1d88384565a7e49abb4e38426efe2212, type: 2}
 --- !u!1 &1395245865
 GameObject:
   m_ObjectHideFlags: 0
