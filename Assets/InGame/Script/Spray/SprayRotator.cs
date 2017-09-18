@@ -25,6 +25,10 @@ public class SprayRotator : MonoBehaviour {
 			_currentAngle = (Mathf.Atan2(distance.y, distance.x) + _correctionvalue) * Mathf.Rad2Deg;
 			SetRotationZ(_currentAngle);
 		}
+		else
+		{
+			transform.localRotation = Quaternion.identity;
+		}
 	}
 
 	public void SetRotationZ(float z)
