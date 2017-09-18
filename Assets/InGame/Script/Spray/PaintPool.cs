@@ -6,22 +6,22 @@ using AL.ALLog;
 public class PaintPool : MonoBehaviour {
 
 	[SerializeField]
-	private PaintMover _paint;
+	private Paint _paint;
 
 	[SerializeField]
 	private int _initPaintCount = 30;
 
 	[SerializeField]
-	private List<PaintMover> _pool;
+	private List<Paint> _pool;
 
 	private void Awake () 
 	{
 		GeneratePaint();
 	}
 
-	private PaintMover InstantiatePaint()
+	private Paint InstantiatePaint()
 	{
-		PaintMover temp = Instantiate(_paint, Vector3.zero, Quaternion.identity, transform);
+		Paint temp = Instantiate(_paint, Vector3.zero, Quaternion.identity, transform);
 		temp.name = _paint.name;
 		temp.gameObject.SetActive(false);
 		_pool.Add(temp);
@@ -36,9 +36,9 @@ public class PaintPool : MonoBehaviour {
 		}
 	}
 
-	public PaintMover GetPaint()
+	public Paint GetPaint()
 	{
-		foreach(PaintMover paint in _pool)
+		foreach(Paint paint in _pool)
 		{
 			if (paint.gameObject.activeSelf.Equals(false))
 				return paint;
