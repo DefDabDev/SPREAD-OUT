@@ -13,21 +13,18 @@ public class Tile : MonoBehaviour {
 
 	[SerializeField]
 	private TILE_TYPE _type = TILE_TYPE.FLOOR;
-	
-	[SerializeField]
-	private bool _isAlreadyPainted = false;
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
-		if (_isAlreadyPainted)
-		{
-			other.gameObject.SetActive(false);
-			return;
-		}
-
 		if (other.tag.CompareTo("Paint").Equals(0))
 		{
 			Paint paint = other.GetComponent<Paint>();
+			if (paint.isAlreadyPainted || !gameObject.activeSelf)
+			{
+				other.gameObject.SetActive(false);
+				return;
+			}
+		
 			switch(_type)
 			{
 				case TILE_TYPE.FLOOR:
@@ -43,7 +40,7 @@ public class Tile : MonoBehaviour {
 				break;
 			}
 
-			_isAlreadyPainted = true;
+			paint.isAlreadyPainted = true;
 		}		
 	}
 }

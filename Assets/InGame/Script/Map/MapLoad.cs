@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using AL.ALLog;
 using UnityEngine;
 
 //////////////////
@@ -69,7 +70,8 @@ public class MapLoad : MonoBehaviour
                 {
                     GameObject obj = Instantiate(tileObj) as GameObject;
                     obj.GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("Tile/Harlem/" + s);
-                    obj.transform.parent = transform;
+                    //obj.transform.parent = transform;
+                    obj.transform.SetParent(transform);
                     obj.transform.localPosition = basicPos + new Vector2(300 * j, 300 * i);
                     obj.transform.localScale = Vector2.one;
                 }
@@ -78,7 +80,7 @@ public class MapLoad : MonoBehaviour
             if (maxCount < tempCount)
                 maxCount = tempCount;
         }
-        Debug.Log(maxCount);
+        ALLog.Log(string.Format("Max Count : {0}", maxCount));
         posX += maxCount - 1;
         posY += spString.Length - 1;
 

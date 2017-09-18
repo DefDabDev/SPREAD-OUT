@@ -27,6 +27,9 @@ public class Paint : MonoBehaviour {
 	private readonly Vector2 _bulletSize = new Vector2(25f, 82f);
 	private readonly Vector2 _floorSize = new Vector2(150f, 150f);
 
+	private bool _isAlreadyPainted = false;
+	public bool isAlreadyPainted { set {_isAlreadyPainted = value;} get {return _isAlreadyPainted;}}
+
 	private void Awake()
 	{
 		_mainCamera = Camera.main;
@@ -37,6 +40,7 @@ public class Paint : MonoBehaviour {
 	private void OnDisable()
 	{
 		transform.position = new Vector3(10f, 10f, 0f);
+		_isAlreadyPainted = false;
 	}
 
 	private void Update()
@@ -69,7 +73,7 @@ public class Paint : MonoBehaviour {
 		return false;
 	}
 
-	public void SetPaint(float angle, Vector2 position)
+	public void SetPaint(float angle, Vector3 position)
 	{
 		StopAllCoroutines();
 		transform.position = position;

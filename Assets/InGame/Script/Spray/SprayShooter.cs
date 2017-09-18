@@ -8,7 +8,7 @@ public class SprayShooter : MonoBehaviour {
 	private PaintPool _pool;
 
 	[SerializeField]
-	private Transform _firePosition;
+	private ParticleSystem _fireParticle;
 
 	[SerializeField]
 	private float _fireDelay = 0.1f;
@@ -37,6 +37,9 @@ public class SprayShooter : MonoBehaviour {
 	private void SetPaint()
 	{
 		Paint temp = _pool.GetPaint();
-		temp.SetPaint(_rotator.currentAngle, _firePosition.position);
+		temp.SetPaint(_rotator.currentAngle, _fireParticle.transform.position);
+		 _fireParticle.Emit(3);
+		// if (!_fireParticle.isPlaying)
+		// 	_fireParticle.Play();
 	}
 }
