@@ -24,6 +24,7 @@ public class Paint : MonoBehaviour {
 	private Rigidbody2D _rigidBody2D = null;
 	private Camera _mainCamera = null;
 	private Transform _targetTile = null;
+	private BoxCollider2D _collider = null;
 	private readonly Vector2 _bulletSize = new Vector2(25f, 82f);
 	private readonly Vector2 _floorSize = new Vector2(150f, 150f);
 
@@ -33,6 +34,7 @@ public class Paint : MonoBehaviour {
 	private void Awake()
 	{
 		_mainCamera = Camera.main;
+		_collider = GetComponent<BoxCollider2D>();
 		_rigidBody2D = GetComponent<Rigidbody2D>();
 		_image = GetComponent<Image>();
 	}
@@ -80,6 +82,7 @@ public class Paint : MonoBehaviour {
 		transform.localRotation = Quaternion.Euler(0f, 0f, angle);
 		_image.sprite = _paints[(int)PaintIndex.BULLET];
 		_image.rectTransform.sizeDelta = _bulletSize;
+		_collider.size = _bulletSize;
 		_targetTile = null;
 		_rigidBody2D.bodyType = RigidbodyType2D.Dynamic;
 		_image.fillAmount = 1f;
@@ -94,6 +97,7 @@ public class Paint : MonoBehaviour {
 		transform.localRotation = Quaternion.identity;
 		_image.sprite = _paints[(int)index];
 		_image.rectTransform.sizeDelta = _floorSize;
+		_collider.size = _floorSize;
 		_targetTile = tile;
 		StartCoroutine("PaintingAnimation");
 	}
@@ -108,6 +112,14 @@ public class Paint : MonoBehaviour {
 			timer += Time.deltaTime;
 			_image.fillAmount = ALLerp.Lerp(_image.fillAmount, 1f, timer);
 			yield return null;
+		}
+	}
+
+	private void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.tag.CompareTo("Paint").Equals(0) && !_isAlreadyPainted)
+		{
+			gameObject.SetActive(false);
 		}
 	}
 }
