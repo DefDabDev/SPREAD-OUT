@@ -61,7 +61,7 @@ public class Paint : MonoBehaviour {
 
 	public bool IsOutOfScreen()
 	{
-		Rect rect = new Rect(0f, 0f, 1920f, 1080f);
+		Rect rect = new Rect(0f, 0f, 2020f, 1180f);
 		if (rect.Contains(_mainCamera.WorldToScreenPoint(transform.position)))
 		{
 			return true;
