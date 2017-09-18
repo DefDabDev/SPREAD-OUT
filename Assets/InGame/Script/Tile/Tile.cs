@@ -5,8 +5,18 @@ using UnityEngine;
 public enum TILE_TYPE
 {
 	FLOOR,
+	WALL,
+	CEILING,
 	CURVE_RIGHT,
 	CURVE_LEFT,
+}
+
+public enum TILE_DIRECTION
+{
+	UP,
+	DOWN,
+	RIGHT,
+	LEFT
 }
 
 public class Tile : MonoBehaviour {
@@ -14,16 +24,19 @@ public class Tile : MonoBehaviour {
 	[SerializeField]
 	private TILE_TYPE _type = TILE_TYPE.FLOOR;
 
+	[SerializeField]
+	private TILE_DIRECTION _direction = TILE_DIRECTION.UP;
+
+	[SerializeField]
+	private bool _isAlreadyPainted = false;
+
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.tag.CompareTo("Paint").Equals(0))
 		{
 			Paint paint = other.GetComponent<Paint>();
-			if (paint.isAlreadyPainted || !gameObject.activeSelf)
-			{
-				other.gameObject.SetActive(false);
+			if (paint.isAlreadyPainted || _isAlreadyPainted)
 				return;
-			}
 		
 			switch(_type)
 			{
@@ -41,6 +54,7 @@ public class Tile : MonoBehaviour {
 			}
 
 			paint.isAlreadyPainted = true;
+			_isAlreadyPainted = true;
 		}		
 	}
 }
