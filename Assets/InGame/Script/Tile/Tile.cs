@@ -53,8 +53,29 @@ public class Tile : MonoBehaviour {
 				break;
 			}
 
+            switch(_direction)
+            {
+                case TILE_DIRECTION.LEFT:
+                    paint.SetStickyPaintRot(PaintIndex.FLOOR, transform, 90);
+                    break;
+                case TILE_DIRECTION.RIGHT:
+                    paint.SetStickyPaintRot(PaintIndex.FLOOR, transform, -90);
+                    break;
+
+            }
+
 			paint.isAlreadyPainted = true;
 			_isAlreadyPainted = true;
 		}		
 	}
+
+    public void typeChange(TILE_TYPE tt)
+    {
+        _type = tt;
+    }
+
+    public void directionChange(TILE_DIRECTION td)
+    {
+        _direction = td;
+    }
 }
