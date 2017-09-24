@@ -27,6 +27,7 @@ public class Paint : MonoBehaviour {
 	private BoxCollider2D _collider = null;
 	private readonly Vector2 _bulletSize = new Vector2(25f, 82f);
 	private readonly Vector2 _floorSize = new Vector2(150f, 150f);
+	private readonly Rect _screenRect = new Rect(0f, 0f, 1920f, 1080f);
 
 	private bool _isAlreadyPainted = false;
 	public bool isAlreadyPainted { set {_isAlreadyPainted = value;} get {return _isAlreadyPainted;}}
@@ -67,8 +68,7 @@ public class Paint : MonoBehaviour {
 
 	public bool IsOutOfScreen()
 	{
-		Rect rect = new Rect(0f, 0f, 2020f, 1180f);
-		if (rect.Contains(_mainCamera.WorldToScreenPoint(transform.position)))
+		if (_screenRect.Contains(_mainCamera.WorldToScreenPoint(transform.position)))
 		{
 			return true;
 		}
