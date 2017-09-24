@@ -102,6 +102,12 @@ public class Paint : MonoBehaviour {
 		StartCoroutine("PaintingAnimation");
 	}
 
+    public void SetStickyPaintRot(PaintIndex index, Transform tile, float rotation)
+    {
+        SetStickyPaint(index, tile);
+        transform.Rotate(new Vector3(0, 0, rotation));
+    }
+
 	private IEnumerator PaintingAnimation()
 	{
 		float timer = 0f;
