@@ -28,6 +28,9 @@ public class Tile : MonoBehaviour {
 	private TILE_DIRECTION _direction = TILE_DIRECTION.UP;
 
 	[SerializeField]
+	private BoxCollider2D _collider = null;
+
+	[SerializeField]
 	private StickyPaint _stickyPaint;
 
 	[SerializeField]
@@ -37,7 +40,6 @@ public class Tile : MonoBehaviour {
 	{
 		if (other.tag.CompareTo("Paint").Equals(0))
 		{
-			
 			if (_isAlreadyPainted)
 			{
 				other.gameObject.SetActive(false);
@@ -70,16 +72,30 @@ public class Tile : MonoBehaviour {
 
             }
 			_isAlreadyPainted = true;
+			other.gameObject.SetActive(false);
 		}		
 	}
 
-    public void typeChange(TILE_TYPE tt)
+    public void typeChange(TILE_TYPE type)
     {
-        _type = tt;
+        _type = type;
+
+		switch(_type)
+		{
+			case TILE_TYPE.CURVE_LEFT: case TILE_TYPE.CURVE_RIGHT:
+				_collider.isTrigger = true;
+				gameObject.tag = "CurvTile";
+				break;
+
+			default:
+				_collider.isTrigger = false;
+				gameObject.tag = "Tile";
+				break;
+		}
     }
 
-    public void directionChange(TILE_DIRECTION td)
+    public void directionChange(TILE_DIRECTION direction)
     {
-        _direction = td;
+        _direction = direction;
     }
 }
