@@ -45,10 +45,8 @@ public class RunState : State
         Debug.DrawLine(transform.position + (Vector3.down * 1.2f), transform.position + (Vector3.down * 1.2f) + (Vector3.down * _groundDisatance), Color.green);
 #endif
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + (Vector3.down * 1.2f), Vector3.down, _groundDisatance);
-        if (hit)
+        if (Physics2D.Raycast(transform.position + (Vector3.down * 1.2f), Vector3.down, _groundDisatance))
         {
-            Debug.Log(hit.collider.name);
             _isJump = false;
         }
         else

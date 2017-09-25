@@ -69,10 +69,9 @@ public class Monster : MonoBehaviour
     {
         if (other.tag.CompareTo("Paint").Equals(0))
         {
-            Paint paint = other.GetComponent<Paint>();
-            if (paint.isAlreadyPainted || isChgColor)
+            // Paint paint = other.GetComponent<Paint>();
+            if (isChgColor)
                 return;
-            paint.isAlreadyPainted = true;
 
             // 헬멧색 바뀜 !
             isChgColor = true;
