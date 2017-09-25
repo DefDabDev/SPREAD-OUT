@@ -93,7 +93,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 250, y: 250}
-  m_EdgeRadius: 0.11
+  m_EdgeRadius: 0.12
 --- !u!114 &114407836485181962
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -151,6 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 0
   _direction: 0
+  _collider: {fileID: 61052228852819432}
   _stickyPaint: {fileID: 114871491130229650}
   _isAlreadyPainted: 0
 --- !u!114 &114986814441825848
