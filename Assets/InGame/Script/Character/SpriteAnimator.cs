@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using AL.ALLog;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,9 +39,11 @@ public class SpriteAnimator : MonoBehaviour {
             if (_animationState[i].name.Equals(name))
             {
                 _currentAnimation = _animationState[i];
-                break;
+                return;
             }
         }
+
+        ALLog.ErrorLog(string.Format("Can't find state! : {0}", name));
     }
 
     private void Update()

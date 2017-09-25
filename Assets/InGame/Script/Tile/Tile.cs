@@ -28,54 +28,74 @@ public class Tile : MonoBehaviour {
 	private TILE_DIRECTION _direction = TILE_DIRECTION.UP;
 
 	[SerializeField]
+	private BoxCollider2D _collider = null;
+
+	[SerializeField]
+	private StickyPaint _stickyPaint;
+
+	[SerializeField]
 	private bool _isAlreadyPainted = false;
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.tag.CompareTo("Paint").Equals(0))
 		{
-			Paint paint = other.GetComponent<Paint>();
-			if (paint.isAlreadyPainted || _isAlreadyPainted)
+			if (_isAlreadyPainted)
+			{
+				other.gameObject.SetActive(false);
 				return;
-		
+			}
+
 			switch(_type)
 			{
 				case TILE_TYPE.FLOOR:
-				paint.SetStickyPaint(PaintIndex.FLOOR, transform);
-				break;
+					_stickyPaint.SetPaint(PaintIndex.FLOOR);
+					break;
 
 				case TILE_TYPE.CURVE_RIGHT:
-				paint.SetStickyPaint(PaintIndex.RIGHT, transform);
-				break;
+					_stickyPaint.SetPaint(PaintIndex.RIGHT);
+					break;
 
 				case TILE_TYPE.CURVE_LEFT:
-				paint.SetStickyPaint(PaintIndex.LEFT, transform);
-				break;
+					_stickyPaint.SetPaint(PaintIndex.LEFT);
+					break;
 			}
 
             switch(_direction)
             {
                 case TILE_DIRECTION.LEFT:
-                    paint.SetStickyPaintRot(PaintIndex.FLOOR, transform, 90);
+					_stickyPaint.SetPaintRotation(90f);
                     break;
                 case TILE_DIRECTION.RIGHT:
-                    paint.SetStickyPaintRot(PaintIndex.FLOOR, transform, -90);
+					_stickyPaint.SetPaintRotation(-90f);
                     break;
 
             }
-
-			paint.isAlreadyPainted = true;
 			_isAlreadyPainted = true;
+			other.gameObject.SetActive(false);
 		}		
 	}
 
-    public void typeChange(TILE_TYPE tt)
+    public void typeChange(TILE_TYPE type)
     {
-        _type = tt;
+        _type = type;
+
+		switch(_type)
+		{
+			case TILE_TYPE.CURVE_LEFT: case TILE_TYPE.CURVE_RIGHT:
+				_collider.isTrigger = true;
+				gameObject.tag = "CurvTile";
+				break;
+
+			default:
+				_collider.isTrigger = false;
+				gameObject.tag = "Tile";
+				break;
+		}
     }
 
-    public void directionChange(TILE_DIRECTION td)
+    public void directionChange(TILE_DIRECTION direction)
     {
-        _direction = td;
+        _direction = direction;
     }
 }

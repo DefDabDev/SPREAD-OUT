@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Paint
   - Tile
+  - CurvTile
   layers:
   - Default
   - TransparentFX

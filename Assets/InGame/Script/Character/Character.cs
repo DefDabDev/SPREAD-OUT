@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using AL.ALLog;
 using UnityEngine;
 
 public class Character : MonoBehaviour {
@@ -31,7 +32,8 @@ public class Character : MonoBehaviour {
         for (int i = 0; i < _states.Count; ++i)
             if (_states[i].stateName.Equals(name))
                 return _states[i];
-        Debug.LogError(string.Format("Can't Find State! Name ({0})", name));
+
+        ALLog.ErrorLog(string.Format("Can't Find State! Name ({0})", name));
         return null;
     }
 
@@ -46,5 +48,22 @@ public class Character : MonoBehaviour {
             _currentState.ToChange();
         _currentState = state;
         _currentState.OnChange();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        switch(other.tag)
+        {
+            case "CurvTile":
+                ChangeState(StateNames.clibState);
+                break;
+
+            case "Tile":
+                
+                break;
+
+            default:
+                break;
+        }
     }
 }
