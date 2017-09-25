@@ -68,22 +68,31 @@ public class MapLoad : MonoBehaviour
                     break;
                 if (!s.Equals("0"))
                 {
-                    GameObject obj = Instantiate(tileObj) as GameObject;
-                    obj.GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("Tile/Harlem/" + s);
-                    //obj.transform.parent = transform;
-                    obj.transform.SetParent(transform);
-                    obj.transform.localPosition = basicPos + new Vector2(300 * j, 300 * i);
-                    obj.transform.localScale = Vector2.one;
+                    if (s.Equals("@"))
+                    {
+                        // H Monster
+                        MonsterManager.mm.createMonster(MTYPE.HMONSTER, basicPos + new Vector2(300 * j, 300 * i));
+                    }
+                    else
+                    {
+                        GameObject obj = Instantiate(tileObj) as GameObject;
+                        obj.GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("Tile/Harlem/" + s);
+                        //obj.transform.parent = transform;
+                        obj.transform.SetParent(transform);
+                        obj.transform.localPosition = basicPos + new Vector2(300 * j, 300 * i);
+                        obj.transform.localScale = Vector2.one;
 
-                    if (s.Equals("4"))
-                        obj.SendMessage("typeChange", TILE_TYPE.CURVE_RIGHT);
-                    else if (s.Equals("3"))
-                        obj.SendMessage("typeChange", TILE_TYPE.CURVE_LEFT);
-                    else if (s.Equals("5") || s.Equals("8") || s.Equals("y"))
-                        obj.SendMessage("directionChange", TILE_DIRECTION.RIGHT);
-                    else if (s.Equals("6") || s.Equals("x") || s.Equals("z"))
-                        obj.SendMessage("directionChange", TILE_DIRECTION.LEFT);
+                        if (s.Equals("4"))
+                            obj.SendMessage("typeChange", TILE_TYPE.CURVE_RIGHT);
+                        else if (s.Equals("3"))
+                            obj.SendMessage("typeChange", TILE_TYPE.CURVE_LEFT);
+                        else if (s.Equals("5") || s.Equals("8") || s.Equals("y"))
+                            obj.SendMessage("directionChange", TILE_DIRECTION.RIGHT);
+                        else if (s.Equals("6") || s.Equals("x") || s.Equals("z"))
+                            obj.SendMessage("directionChange", TILE_DIRECTION.LEFT);
+                    }
                 }
+
                 tempCount++;
             }
             if (maxCount < tempCount)
