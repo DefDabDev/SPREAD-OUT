@@ -25,6 +25,10 @@ public abstract class State : MonoBehaviour {
     protected STATE _state = STATE.SLEEP;
     public STATE state { get { return _state; } }
 
+    [SerializeField]
+    protected Character _character = null;
+    public Character charcter {get {return _character;}}
+
     /// <summary>
     /// State 이름
     /// </summary>

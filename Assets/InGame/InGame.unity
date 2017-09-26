@@ -905,7 +905,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigid2D: {fileID: 1371640313}
-  _speed: 0
+  _speed: 1
   _isMove: 0
 --- !u!1 &1395245865
 GameObject:

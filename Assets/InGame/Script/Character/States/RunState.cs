@@ -66,10 +66,19 @@ public class RunState : State
         rigid2D.velocity = new Vector3(rigid2D.velocity.x, _jumpScale);
         _groundDisatance = _originGroundDistance;
         _isJump = true;
+        spriteAnimator.ChangeState(StateNames.jumpState);
     }
 
     public override void PaintAction()
     {
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag.Equals("Tile"))
+        {
+           spriteAnimator.ChangeState(StateNames.runState);
+        }
     }
 }

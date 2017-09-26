@@ -9,7 +9,6 @@ namespace AL.ALLog
 		public static void Log(object message)
 		{
 		#if UNITY_EDITOR
-			if (Application.isEditor)
 				Debug.Log(message);
 		#endif
 		}
@@ -17,7 +16,6 @@ namespace AL.ALLog
 		public static void WarningLog(object message)
 		{
 		#if UNITY_EDITOR
-			if (Application.isEditor)
 				Debug.LogWarning(message);
 		#endif
 		}
@@ -25,7 +23,6 @@ namespace AL.ALLog
 		public static void ErrorLog(object message)
 		{
 		#if UNITY_EDITOR
-			if (Application.isEditor)
 				Debug.LogError(message);
 		#endif
 		}

@@ -44,8 +44,12 @@ public class Character : MonoBehaviour {
     
     public void ChangeState(State state)
     {
+        if (_currentState != null && _currentState.Equals(state))
+            return;
+
         if (_currentState != null)
             _currentState.ToChange();
+            
         _currentState = state;
         _currentState.OnChange();
     }

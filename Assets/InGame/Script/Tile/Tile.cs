@@ -36,6 +36,13 @@ public class Tile : MonoBehaviour {
 	[SerializeField]
 	private bool _isAlreadyPainted = false;
 
+	private readonly Vector2 _originTileSize = new Vector2(250f, 250f);
+	private void OnDisable()
+	{
+		_isAlreadyPainted = false;
+		transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 0f);
+	}
+
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.tag.CompareTo("Paint").Equals(0))
@@ -71,6 +78,7 @@ public class Tile : MonoBehaviour {
                     break;
 
             }
+			transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 1f);
 			_isAlreadyPainted = true;
 			other.gameObject.SetActive(false);
 		}		
@@ -85,11 +93,13 @@ public class Tile : MonoBehaviour {
 			case TILE_TYPE.CURVE_LEFT: case TILE_TYPE.CURVE_RIGHT:
 				_collider.isTrigger = true;
 				gameObject.tag = "CurvTile";
+				_collider.size = new Vector2(_originTileSize.x + 10, _originTileSize.y + 10);
 				break;
 
 			default:
 				_collider.isTrigger = false;
 				gameObject.tag = "Tile";
+				_collider.size = _originTileSize;
 				break;
 		}
     }
