@@ -10,6 +10,9 @@ public class MJump : Monster
     void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.CompareTag("Tile") && !isChgColor)
+        {
             rigidbody2D.velocity = new Vector2(0, 4);
+            targetBlock = coll.gameObject;
+        }
     }
 }

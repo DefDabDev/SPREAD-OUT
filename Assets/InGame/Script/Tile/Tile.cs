@@ -46,35 +46,40 @@ public class Tile : MonoBehaviour {
 				return;
 			}
 
-			switch(_type)
-			{
-				case TILE_TYPE.FLOOR:
-					_stickyPaint.SetPaint(PaintIndex.FLOOR);
-					break;
-
-				case TILE_TYPE.CURVE_RIGHT:
-					_stickyPaint.SetPaint(PaintIndex.RIGHT);
-					break;
-
-				case TILE_TYPE.CURVE_LEFT:
-					_stickyPaint.SetPaint(PaintIndex.LEFT);
-					break;
-			}
-
-            switch(_direction)
-            {
-                case TILE_DIRECTION.LEFT:
-					_stickyPaint.SetPaintRotation(90f);
-                    break;
-                case TILE_DIRECTION.RIGHT:
-					_stickyPaint.SetPaintRotation(-90f);
-                    break;
-
-            }
-			_isAlreadyPainted = true;
+            painting();
 			other.gameObject.SetActive(false);
 		}		
 	}
+
+    public void painting()
+    {
+        switch (_type)
+        {
+            case TILE_TYPE.FLOOR:
+                _stickyPaint.SetPaint(PaintIndex.FLOOR);
+                break;
+
+            case TILE_TYPE.CURVE_RIGHT:
+                _stickyPaint.SetPaint(PaintIndex.RIGHT);
+                break;
+
+            case TILE_TYPE.CURVE_LEFT:
+                _stickyPaint.SetPaint(PaintIndex.LEFT);
+                break;
+        }
+
+        switch (_direction)
+        {
+            case TILE_DIRECTION.LEFT:
+                _stickyPaint.SetPaintRotation(90f);
+                break;
+            case TILE_DIRECTION.RIGHT:
+                _stickyPaint.SetPaintRotation(-90f);
+                break;
+
+        }
+        _isAlreadyPainted = true;
+    }
 
     public void typeChange(TILE_TYPE type)
     {

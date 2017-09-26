@@ -7,7 +7,10 @@ public class MHuman : Monster
     void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.CompareTag("Tile"))
+        {
             StopCoroutine("flyingCheck");
+            targetBlock = coll.gameObject;
+        }
     }
     void OnCollisionExit2D(Collision2D coll)
     {

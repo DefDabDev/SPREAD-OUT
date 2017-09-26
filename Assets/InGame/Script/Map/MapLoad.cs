@@ -69,13 +69,13 @@ public class MapLoad : MonoBehaviour
                 if (!s.Equals("0"))
                 {
                     if (s.Equals("@"))
-                        MonsterManager.mm.createMonster(MTYPE.MHUMAN, basicPos + new Vector2(300 * j, 300 * i));
+                        MonsterManager.mm.createMonster(MTYPE.MHUMAN, basicPos + new Vector2(300 * j, 300 * i + 200));
                     else if (s.Equals("#"))
-                        MonsterManager.mm.createMonster(MTYPE.MUMBRELLA, basicPos + new Vector2(300 * j, 300 * i));                    
+                        MonsterManager.mm.createMonster(MTYPE.MUMBRELLA, basicPos + new Vector2(300 * j, 300 * i + 200));                    
                     else if (s.Equals("$"))
-                        MonsterManager.mm.createMonster(MTYPE.MJUMP, basicPos + new Vector2(300 * j, 300 * i));                    
+                        MonsterManager.mm.createMonster(MTYPE.MJUMP, basicPos + new Vector2(300 * j, 300 * i + 200));                    
                     else if (s.Equals("%"))
-                        MonsterManager.mm.createMonster(MTYPE.MBIRD, basicPos + new Vector2(300 * j, 300 * i));                    
+                        MonsterManager.mm.createMonster(MTYPE.MBIRD, basicPos + new Vector2(300 * j, 300 * i + 200));                    
                     else
                     {
                         GameObject obj = Instantiate(tileObj) as GameObject;
@@ -88,6 +88,10 @@ public class MapLoad : MonoBehaviour
                         if (s.Equals("4"))
                             obj.SendMessage("typeChange", TILE_TYPE.CURVE_RIGHT);
                         else if (s.Equals("3"))
+                            obj.SendMessage("typeChange", TILE_TYPE.CURVE_LEFT);
+                        else if (s.Equals("1"))
+                            obj.SendMessage("typeChange", TILE_TYPE.CURVE_RIGHT);
+                        else if (s.Equals("2"))
                             obj.SendMessage("typeChange", TILE_TYPE.CURVE_LEFT);
                         else if (s.Equals("5") || s.Equals("8") || s.Equals("y"))
                             obj.SendMessage("directionChange", TILE_DIRECTION.RIGHT);
