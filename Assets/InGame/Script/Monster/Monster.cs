@@ -18,6 +18,7 @@ public class Monster : MonoBehaviour
     protected DIRECTION _dir = DIRECTION.LEFT;
     public MTYPE _type = MTYPE.MHUMAN;
 
+    protected GameObject targetBlock;
     [SerializeField]
     GameObject helmet;
 
@@ -38,6 +39,7 @@ public class Monster : MonoBehaviour
 
     void Awake()
     {
+        targetBlock = null;
         StartCoroutine("sleepStatus");
     }
 
@@ -108,6 +110,8 @@ public class Monster : MonoBehaviour
                 gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
                 gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 StartCoroutine("hideOnBush");
+
+                targetBlock.SendMessage("painting");
             }
         }
     }
