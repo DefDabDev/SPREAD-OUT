@@ -4,11 +4,6 @@ using System.IO;
 using AL.ALLog;
 using UnityEngine;
 
-//////////////////
-// 일단 텍스트 불러오는걸로 하자 !
-///
-// 그래 ! 그게 좋겠따 !
-//////////////////
 public class MapLoad : MonoBehaviour
 {
     Vector2 basicPos;
@@ -26,6 +21,11 @@ public class MapLoad : MonoBehaviour
         basicPos = new Vector2(0, -710);
         loadMap(string.Format("MapData/{0}", _testFileName));
         //createMap(); createMap(); createMap(); createMap();
+    }
+
+    void Update()
+    {
+        //transform.position -= new Vector3(1.5f * Time.deltaTime, 0);
     }
 
     /// <summary>
@@ -69,10 +69,13 @@ public class MapLoad : MonoBehaviour
                 if (!s.Equals("0"))
                 {
                     if (s.Equals("@"))
-                    {
-                        // H Monster
-                        MonsterManager.mm.createMonster(MTYPE.HMONSTER, basicPos + new Vector2(300 * j, 300 * i));
-                    }
+                        MonsterManager.mm.createMonster(MTYPE.MHUMAN, basicPos + new Vector2(300 * j, 300 * i));
+                    else if (s.Equals("#"))
+                        MonsterManager.mm.createMonster(MTYPE.MUMBRELLA, basicPos + new Vector2(300 * j, 300 * i));                    
+                    else if (s.Equals("$"))
+                        MonsterManager.mm.createMonster(MTYPE.MJUMP, basicPos + new Vector2(300 * j, 300 * i));                    
+                    else if (s.Equals("%"))
+                        MonsterManager.mm.createMonster(MTYPE.MBIRD, basicPos + new Vector2(300 * j, 300 * i));                    
                     else
                     {
                         GameObject obj = Instantiate(tileObj) as GameObject;

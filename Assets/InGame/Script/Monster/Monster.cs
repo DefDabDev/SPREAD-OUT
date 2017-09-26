@@ -2,11 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum DIRECTION
+{
+    LEFT,
+    RIGHT
+}
+
+
 public class Monster : MonoBehaviour
 {
-    private const float SPEED = 3f;
-    private float _speed = SPEED;
-    private bool isChgColor = false;    // 물감에게 맞았는지
+    private const float SPEED = 1.8f;
+    protected float _speed = SPEED;
+    protected bool isChgColor = false;    // 물감에게 맞았는지
+
+    protected DIRECTION _dir = DIRECTION.LEFT;
+    public MTYPE _type = MTYPE.MHUMAN;
+
+    [SerializeField]
+    GameObject helmet;
 
     [Header("Animation")]
     [SerializeField]
@@ -19,12 +32,11 @@ public class Monster : MonoBehaviour
      *   [2] 멈춤
      *   [3] 맞음
      *   [4] 숙임
-     *   [5] 점프_0
-     *   [6] 점프_1
+     *   [5] 점프
      */
 
 
-    void Start()
+    void Awake()
     {
         StartCoroutine("sleepStatus");
     }
@@ -50,7 +62,10 @@ public class Monster : MonoBehaviour
         while (true)
         {
             yield return null;
-            transform.position -= new Vector3(_speed * Time.deltaTime, 0);
+            if (_dir.Equals(DIRECTION.LEFT))
+                transform.position -= new Vector3(_speed * Time.deltaTime, 0);
+            else
+                transform.position += new Vector3(_speed * Time.deltaTime, 0);
         }
     }
 
@@ -58,9 +73,9 @@ public class Monster : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.07f);
             _image.sprite = flip[0];
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.07f);
             _image.sprite = flip[1];
         }
     }
@@ -69,15 +84,20 @@ public class Monster : MonoBehaviour
     {
         if (other.tag.CompareTo("Paint").Equals(0))
         {
-            // Paint paint = other.GetComponent<Paint>();
-            if (isChgColor)
+            if (isChgColor || _type.Equals(MTYPE.MUMBRELLA))
                 return;
 
             // 헬멧색 바뀜 !
+            if (!helmet.Equals(null))
+                helmet.SetActive(true);
             isChgColor = true;
+            hitPaint();
+
             StopCoroutine("walkingAnimation");
             StopCoroutine("walkingStatus");
+
             _image.sprite = flip[2];
+            other.gameObject.SetActive(false);
         }
         else if (other.tag.CompareTo("Attack").Equals(0))
         {
@@ -91,7 +111,11 @@ public class Monster : MonoBehaviour
             }
         }
     }
-        
+
+    protected virtual void hitPaint()
+    {
+    }
+
     IEnumerator hideOnBush()
     {
         float originPos = gameObject.transform.localPosition.y;
