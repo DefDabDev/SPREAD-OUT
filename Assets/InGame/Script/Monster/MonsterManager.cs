@@ -4,7 +4,10 @@ using UnityEngine;
 
 public enum MTYPE
 {
-    HMONSTER
+    MHUMAN,
+    MJUMP,
+    MUMBRELLA,
+    MBIRD
 }
 
 // o-pool
