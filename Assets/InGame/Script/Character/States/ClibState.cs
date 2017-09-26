@@ -5,12 +5,21 @@ using UnityEngine;
 public class ClibState : State {
 
 	[SerializeField]
+	private float _speed = 1f;
+
+	[SerializeField]
 	private float _radius = 75f;
 
-    public override void Init()
+	[SerializeField]
+	private bool _isClimb = false;
+
+	private bool _flag = false;
+
+  	public override void Init()
     {
 		_state = STATE.SLEEP;
 		_stateName = StateNames.clibState;
+		_isClimb = false;
     }
 
     public override void OnChange()
@@ -18,13 +27,15 @@ public class ClibState : State {
 		_state = STATE.RUN;
 		rigid2D.gravityScale = 0f;
 		StartCoroutine("OnToWall");
-		Debug.Log("Clib State!");
+		_isClimb = false;
+		_flag = false;
     }
 
     public override void ToChange()
     {
 		_state = STATE.SLEEP;
-		rigid2D.gravityScale = 1f;	
+		rigid2D.gravityScale = 1f;
+		_isClimb = false;
     }
 
 	private IEnumerator OnToWall()
@@ -38,17 +49,41 @@ public class ClibState : State {
 			transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(0, 0, 90), timer);
 			yield return null;
 		}
+		_isClimb = true;
+	}
+
+	private IEnumerator OffFromWall()
+	{
+		float timer = 0f;
+		Vector3 target = new Vector3(transform.localPosition.x - _radius, transform.localPosition.y - _radius, 0f);
+		while(timer <= 1f)
+		{
+			timer += Time.deltaTime;
+			transform.localPosition = Vector3.Lerp(transform.localPosition, target, timer);
+			transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(0, 0, 0), timer);
+			yield return null;
+		}
+		_character.ChangeState(StateNames.runState);
 	}
 
 	public override void Doing()
     {
+		if (_isClimb)
+		{
+			rigid2D.velocity = Vector3.up * _speed;
+
+			if (!_character.IsPaintTile())
+			{
+				Debug.Log("Game Over");
+			}
+		}
     }
 
-    public override void NormalAction()
-    {
-    }
-
-    public override void PaintAction()
-    {
-    }
+	public override void TriggerEnter(Collider2D other)
+	{
+		if (_isClimb && other.tag.Equals("Player"))
+		{
+			StartCoroutine("OffFromWall");
+		}
+	}
 }

@@ -25,6 +25,10 @@ public abstract class State : MonoBehaviour {
     protected STATE _state = STATE.SLEEP;
     public STATE state { get { return _state; } }
 
+    [SerializeField]
+    protected Character _character = null;
+    public Character charcter {get {return _character;}}
+
     /// <summary>
     /// State 이름
     /// </summary>
@@ -37,6 +41,9 @@ public abstract class State : MonoBehaviour {
 
     private Rigidbody2D _rigidBody2D = null;
     public Rigidbody2D rigid2D {get {return _rigidBody2D ?? (_rigidBody2D = GetComponent<Rigidbody2D>());}}
+
+    private BoxCollider2D _collider = null;
+    public new BoxCollider2D collider {get {return _collider ?? (_collider = GetComponent<BoxCollider2D>());}}
 
     /// <summary>
     /// 이전 State에서 현재 State로 넘어갈 때 할일
@@ -61,10 +68,38 @@ public abstract class State : MonoBehaviour {
     /// <summary>
     /// 페인트가 없는 블록에서의 액션
     /// </summary>
-    public abstract void NormalAction();
+    public virtual void NormalActionUp() {}
 
     /// <summary>
     /// 페인트가 있는 블록에서의 액션
     /// </summary>
-    public abstract void PaintAction();
-}
+    public virtual void PaintActionUp() {}
+
+    /// <summary>
+    /// 페인트가 없는 블록에서의 액션
+    /// </summary>
+    public virtual void NormalActionPress() {}
+
+    /// <summary>
+    /// 페인트가 있는 블록에서의 액션
+    /// </summary>
+    public virtual void PaintActionPress() {}
+
+    /// <summary>
+    /// 페인트가 없는 블록에서의 액션
+    /// </summary>
+    public virtual void NormalActionDown() {}
+
+    /// <summary>
+    /// 페인트가 있는 블록에서의 액션
+    /// </summary>
+    public virtual void PaintActionDown() {}
+
+    public virtual void TriggerEnter(Collider2D other) {}
+    public virtual void TriggerStay(Collider2D other) {}
+    public virtual void TriggerExit(Collider2D other) {}
+
+    public virtual void CollisionEnter(Collision2D other) {}
+    public virtual void CollisionStay(Collision2D other) {}
+    public virtual void CollisionExit(Collision2D other) {}
+ }

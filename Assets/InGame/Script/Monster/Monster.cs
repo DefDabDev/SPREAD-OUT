@@ -73,6 +73,9 @@ public class Monster : MonoBehaviour
 
     IEnumerator walkingAnimation()
     {
+        if (flip == null || flip[0] == null || flip[1] == null)
+            yield break;
+
         while (true)
         {
             yield return new WaitForSeconds(0.07f);

@@ -13,6 +13,10 @@ public class SprayShooter : MonoBehaviour {
 	[SerializeField]
 	private float _fireDelay = 0.1f;
 
+	[SerializeField]
+	private bool _isLock = false;
+	public bool isLock {set {_isLock = value;} get {return _isLock;}}
+
 	private SprayRotator _rotator = null;
 
 	private void Start () 
@@ -25,7 +29,7 @@ public class SprayShooter : MonoBehaviour {
 	{
 		while(true)
 		{
-			if (Input.GetMouseButton(0))
+			if (!_isLock && Input.GetMouseButton(0))
 			{
 				SetPaint();
 				yield return new WaitForSeconds(_fireDelay);

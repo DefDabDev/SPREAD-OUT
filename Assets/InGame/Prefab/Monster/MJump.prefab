@@ -104,8 +104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f65e84fc28278684c95ece1e1e241498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 1
-  helmet: {fileID: 1049081606291748}
+  _type: 0
+  helmet: {fileID: 0}
   _image: {fileID: 114945392799462478}
   flip:
   - {fileID: 21300040, guid: 4c1a770638359485aaca30195ba78011, type: 3}
