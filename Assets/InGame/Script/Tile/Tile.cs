@@ -52,38 +52,7 @@ public class Tile : MonoBehaviour {
 				other.gameObject.SetActive(false);
 				return;
 			}
-
-<<<<<<< HEAD
-			switch(_type)
-			{
-				case TILE_TYPE.FLOOR:
-					_stickyPaint.SetPaint(PaintIndex.FLOOR);
-					break;
-
-				case TILE_TYPE.CURVE_RIGHT:
-					_stickyPaint.SetPaint(PaintIndex.RIGHT);
-					break;
-
-				case TILE_TYPE.CURVE_LEFT:
-					_stickyPaint.SetPaint(PaintIndex.LEFT);
-					break;
-			}
-
-            switch(_direction)
-            {
-                case TILE_DIRECTION.LEFT:
-					_stickyPaint.SetPaintRotation(90f);
-                    break;
-                case TILE_DIRECTION.RIGHT:
-					_stickyPaint.SetPaintRotation(-90f);
-                    break;
-
-            }
-			transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 1f);
-			_isAlreadyPainted = true;
-=======
             painting();
->>>>>>> upstream/master
 			other.gameObject.SetActive(false);
 		}		
 	}
@@ -116,6 +85,7 @@ public class Tile : MonoBehaviour {
 
         }
         _isAlreadyPainted = true;
+		transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 1f);
     }
 
     public void typeChange(TILE_TYPE type)

@@ -13,6 +13,8 @@ public class ClibState : State {
 	[SerializeField]
 	private bool _isClimb = false;
 
+	private bool _flag = false;
+
   	public override void Init()
     {
 		_state = STATE.SLEEP;
@@ -26,6 +28,7 @@ public class ClibState : State {
 		rigid2D.gravityScale = 0f;
 		StartCoroutine("OnToWall");
 		_isClimb = false;
+		_flag = false;
     }
 
     public override void ToChange()
@@ -68,22 +71,17 @@ public class ClibState : State {
 		if (_isClimb)
 		{
 			rigid2D.velocity = Vector3.up * _speed;
+
+			if (!_character.IsPaintTile())
+			{
+				Debug.Log("Game Over");
+			}
 		}
     }
 
-    public override void NormalAction()
-    {
-		
-    }
-
-    public override void PaintAction()
-    {
-
-    }
-
-	private void OnTriggerEnter2D(Collider2D other)
+	public override void TriggerEnter(Collider2D other)
 	{
-		if (_isClimb)
+		if (_isClimb && other.tag.Equals("Player"))
 		{
 			StartCoroutine("OffFromWall");
 		}

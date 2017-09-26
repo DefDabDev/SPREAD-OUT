@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using AL.ALUtil;
 using UnityEngine;
 
 public class RunState : State
@@ -14,6 +15,8 @@ public class RunState : State
 
     [SerializeField]
     private bool _isJump = false;
+
+    private bool _isIn = false;
 
     public override void Init()
     {
@@ -33,13 +36,18 @@ public class RunState : State
     {
         TileRunner.instance.isMove = false;
         _state = STATE.SLEEP;
+        StopAllCoroutines();
+
+        if (_isIn)
+            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + 130f, transform.localPosition.z);
+
+        _isIn = false;
+        _isJump = false;
+        _character.spray.isLock = false;
     }
 
     public override void Doing()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            NormalAction();
-
 #if UNITY_EDITOR
         Debug.DrawLine(transform.position + (Vector3.down * 1.2f), transform.position + (Vector3.down * 1.2f) + (Vector3.down * _originGroundDistance), Color.red);
         Debug.DrawLine(transform.position + (Vector3.down * 1.2f), transform.position + (Vector3.down * 1.2f) + (Vector3.down * _groundDisatance), Color.green);
@@ -58,7 +66,7 @@ public class RunState : State
             _groundDisatance = rigid2D.velocity.y < 0 ? _originGroundDistance : 0.001f;
     }
 
-    public override void NormalAction()
+    public override void NormalActionDown()
     {
         if (_isJump)
             return;
@@ -69,16 +77,76 @@ public class RunState : State
         spriteAnimator.ChangeState(StateNames.jumpState);
     }
 
-    public override void PaintAction()
+    public override void PaintActionDown()
     {
-
+        if (_isJump || !charcter.IsPaintTile())
+            return;
+        
+        StartCoroutine("In");
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    public override void PaintActionUp()
+    {
+        StopAllCoroutines();
+        StartCoroutine("Out");
+    }
+
+
+    private IEnumerator In()
+    {
+        if (_isIn)
+            yield break;
+
+        rigid2D.gravityScale = 0f;
+        collider.isTrigger = true;
+        charcter.spray.isLock = true;
+        _isIn = true;
+        float timer = 0f;
+        Vector3 target = new Vector3(transform.localPosition.x, transform.localPosition.y - 130f, transform.localPosition.z);
+        while(timer <= 1f)
+        {
+            timer += Time.deltaTime * 2.5f;
+            transform.localPosition = ALLerp.Lerp(transform.localPosition, target, timer);
+            yield return null;
+        }
+    }
+
+    private IEnumerator Out()
+    {
+        if (!_isIn)
+            yield break;
+
+        float timer = 0f;
+        Vector3 target = new Vector3(transform.localPosition.x, transform.localPosition.y + 130f, transform.localPosition.z);
+        while(timer <= 1f)
+        {
+            timer += Time.deltaTime * 2.5f;
+            transform.localPosition = ALLerp.Lerp(transform.localPosition, target, timer);
+            yield return null;
+        }
+        collider.isTrigger = false;
+        rigid2D.gravityScale = 1f;
+        _isIn = false;
+        charcter.spray.isLock = false;
+    }
+
+    public override void CollisionEnter(Collision2D other)
     {
         if (other.gameObject.tag.Equals("Tile"))
         {
-           spriteAnimator.ChangeState(StateNames.runState);
+            spriteAnimator.ChangeState(StateNames.runState);
+        }
+    }
+
+    public override void TriggerEnter(Collider2D other)
+    {
+        if (other.gameObject.tag.Equals("Tile") && other.transform.localPosition.z < 1f)
+        {
+            if (_isIn)
+            {
+                StartCoroutine("Out");
+                Debug.Log(other.transform.localPosition);
+            }
         }
     }
 }

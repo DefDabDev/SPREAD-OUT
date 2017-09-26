@@ -5,8 +5,8 @@ using AL.ALUtil;
 
 public class TileRunner : ALComponentSingleton<TileRunner> {
 
-	[SerializeField]
-	private Rigidbody2D _rigid2D = null;
+	// [SerializeField]
+	// private Rigidbody2D _rigid2D = null;
 
 	[SerializeField]
 	private float _speed = 1f;
@@ -23,8 +23,9 @@ public class TileRunner : ALComponentSingleton<TileRunner> {
 	private void Update()
 	{
 		if (_isMove)
-			_rigid2D.velocity = Vector2.left * _speed;
-		else
-			_rigid2D.velocity = Vector2.zero;
+			transform.localPosition += (Vector3.left * _speed);
+			// _rigid2D.velocity = Vector2.left * _speed;
+		// else
+			// _rigid2D.velocity = Vector2.zero;
 	}
 }

@@ -33,7 +33,7 @@ public class SpriteAnimator : MonoBehaviour {
     {
         _index = 0;
         _timer = 0f;
-
+        
         for (int i = 0; i < _animationState.Count; ++i)
         {
             if (_animationState[i].name.Equals(name))
