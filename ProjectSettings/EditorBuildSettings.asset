@@ -9,5 +9,8 @@ EditorBuildSettings:
     path: Assets/Intro/Intro.unity
     guid: 1da8d47edabee0240bdf758eb6b97fa4
   - enabled: 1
+    path: Assets/Ready/Ready.unity
+    guid: 7e5ebbd7ad7884f41bee8fb00ef616d8
+  - enabled: 1
     path: Assets/InGame/InGame.unity
     guid: efc5e4a737fa54d039b23f545e8a25dc

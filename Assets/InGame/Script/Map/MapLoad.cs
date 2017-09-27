@@ -69,13 +69,13 @@ public class MapLoad : MonoBehaviour
                 if (!s.Equals("0"))
                 {
                     if (s.Equals("@"))
-                        MonsterManager.mm.createMonster(MTYPE.MHUMAN, basicPos + new Vector2(300 * j, 300 * i + 200));
+                        MonsterManager.mm.createMonster(MTYPE.MHUMAN, basicPos + new Vector2(300 * j, 300 * i));
                     else if (s.Equals("#"))
-                        MonsterManager.mm.createMonster(MTYPE.MUMBRELLA, basicPos + new Vector2(300 * j, 300 * i + 200));                    
+                        MonsterManager.mm.createMonster(MTYPE.MUMBRELLA, basicPos + new Vector2(300 * j, 300 * i));                    
                     else if (s.Equals("$"))
-                        MonsterManager.mm.createMonster(MTYPE.MJUMP, basicPos + new Vector2(300 * j, 300 * i + 200));                    
+                        MonsterManager.mm.createMonster(MTYPE.MJUMP, basicPos + new Vector2(300 * j, 300 * i));                    
                     else if (s.Equals("%"))
-                        MonsterManager.mm.createMonster(MTYPE.MBIRD, basicPos + new Vector2(300 * j, 300 * i + 200));                    
+                        MonsterManager.mm.createMonster(MTYPE.MBIRD, basicPos + new Vector2(300 * j, 300 * i));                    
                     else
                     {
                         GameObject obj = Instantiate(tileObj) as GameObject;

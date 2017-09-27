@@ -439,5 +439,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 851be43df1b944724b3ef1449ff9c5c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: InGame
+  _sceneName: Ready
   _delay: 0.4

@@ -28,6 +28,6 @@ public class MonsterManager : MonoBehaviour
         GameObject obj = Instantiate(monsters[(int)type]) as GameObject;
         obj.transform.SetParent(transform);
         obj.transform.localPosition = pos;
-        obj.transform.localScale = Vector2.one;
+        obj.transform.localScale = Vector2.one * 2;
     }
 }
