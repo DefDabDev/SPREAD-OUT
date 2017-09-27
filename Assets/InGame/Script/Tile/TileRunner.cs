@@ -20,16 +20,25 @@ public class TileRunner : ALComponentSingleton<TileRunner> {
 		instance = this;
 	}
 
-	private void Update()
-	{
-		if (_isMove)
-			transform.localPosition += (Vector3.left * _speed);
-			// _rigid2D.velocity = Vector2.left * _speed;
-		// else
-			// _rigid2D.velocity = Vector2.zero;
-	}
 
-	public void Lerp(float x)
+    private void Update()
+    {
+        if (_isMove && !GameManager.gameEnd)
+            transform.localPosition += (Vector3.left * _speed);
+        // _rigid2D.velocity = Vector2.left * _speed;
+        // else
+        // _rigid2D.velocity = Vector2.zero;
+
+        if (Input.GetKeyDown(KeyCode.A))
+            GameManager.gameEnd = true;
+        if (GameManager.gameEnd)
+        {
+            Camera.main.transform.localPosition = Vector3.Lerp(Camera.main.transform.localPosition, new Vector3(0, 0, -10800), 1 * Time.deltaTime);
+            transform.localPosition = Vector2.Lerp(transform.localPosition, new Vector2(-380, -105), 1 * Time.deltaTime);
+        }
+    }
+
+    public void Lerp(float x)
 	{
 		StartCoroutine("Lerping", transform.localPosition.x - x);
 	}
