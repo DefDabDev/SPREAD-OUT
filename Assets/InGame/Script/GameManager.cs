@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using AL.ALUtil;
 
-public class GameManager : MonoBehaviour
+public class GameManager : ALComponentSingleton<GameManager>
 {
     public static bool gameEnd = false;
 
@@ -15,6 +16,8 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        instance = this;
+        
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 출시전엔 제거할것
         PlayerPrefs.SetInt("score", 0);
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
