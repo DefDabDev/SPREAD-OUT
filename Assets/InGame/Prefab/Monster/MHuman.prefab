@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 114517105213489208}
   m_Layer: 9
   m_Name: MHuman
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -104,6 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b86a6155dd6a146418583fc5e95c2ce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _type: 0
   helmet: {fileID: 1043885102046296}
   _image: {fileID: 114810691276411692}
   flip:

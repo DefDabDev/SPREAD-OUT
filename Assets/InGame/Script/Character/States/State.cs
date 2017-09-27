@@ -11,9 +11,10 @@ public enum STATE
 public static class StateNames
 {
     public const string runState = "RunState";
+    public const string punchState = "PunchState";
     public const string jumpState = "JumpState";
     public const string clibState = "ClibState";
-    public const string deadState = "DeadState";
+    public const string dieState = "DieState";
 }
 
 public abstract class State : MonoBehaviour {
