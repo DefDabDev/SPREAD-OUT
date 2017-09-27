@@ -38,8 +38,10 @@ public class PunchState : State
 
 	private IEnumerator Blink()
 	{
+		_character.isAttacking = true;
 		_star.gameObject.SetActive(true);
 		yield return new WaitForSeconds(_blinkTime);
 		_character.ChangeState(StateNames.runState);
+		_character.isAttacking = false;
 	}
 }

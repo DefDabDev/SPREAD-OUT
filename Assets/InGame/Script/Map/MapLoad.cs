@@ -23,10 +23,10 @@ public class MapLoad : MonoBehaviour
         //createMap(); createMap(); createMap(); createMap();
     }
 
-    void Update()
-    {
-        //transform.position -= new Vector3(1.5f * Time.deltaTime, 0);
-    }
+    // void Update()
+    // {
+    //     transform.position -= new Vector3(1.5f * Time.deltaTime, 0);
+    // }
 
     /// <summary>
     /// createMap

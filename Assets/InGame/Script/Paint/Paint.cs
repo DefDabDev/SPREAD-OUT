@@ -11,7 +11,6 @@ public class Paint : MonoBehaviour {
 	[SerializeField]
 	private float _speed = 1f;
 
-	private Image _image = null;
 	private Rigidbody2D _rigidBody2D = null;
 	private Camera _mainCamera = null;
 	private readonly Rect _screenRect = new Rect(0f, 0f, 1920f, 1080f);
@@ -20,7 +19,6 @@ public class Paint : MonoBehaviour {
 	{
 		_mainCamera = Camera.main;
 		_rigidBody2D = GetComponent<Rigidbody2D>();
-		_image = GetComponent<Image>();
 	}
 
 	private void OnDisable()
@@ -55,8 +53,6 @@ public class Paint : MonoBehaviour {
 		StopAllCoroutines();
 		transform.position = position;
 		transform.localRotation = Quaternion.Euler(0f, 0f, angle);
-		_rigidBody2D.bodyType = RigidbodyType2D.Dynamic;
-		_image.fillAmount = 1f;
 		gameObject.SetActive(true);
 	}
 }
