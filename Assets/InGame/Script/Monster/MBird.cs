@@ -8,6 +8,7 @@ public class MBird : Monster
     {
         _speed *= 2;
     }
+
     void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.CompareTag("Tile"))
