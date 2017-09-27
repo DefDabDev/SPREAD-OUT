@@ -134,8 +134,9 @@ public class Monster : MonoBehaviour
         {
             yield return null;
             gameObject.transform.localPosition -= new Vector3(0, 100 * Time.deltaTime);
+            gameObject.transform.localScale -= new Vector3(0, 10 * Time.deltaTime);
         }
 
         Destroy(this);
-    }    
+    }
 }
