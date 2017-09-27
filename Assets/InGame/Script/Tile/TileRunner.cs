@@ -12,7 +12,7 @@ public class TileRunner : ALComponentSingleton<TileRunner> {
 	private float _speed = 1f;
 
 	[SerializeField]
-	private bool _isMove = false;
+	private bool _isMove = true;
 	public bool isMove {set {_isMove = value;} get {return _isMove;}}
 
 	private void Awake()

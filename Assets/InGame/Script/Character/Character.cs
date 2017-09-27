@@ -17,7 +17,7 @@ public class Character : MonoBehaviour {
 
     private State _currentState = null;
 
-	void Awake ()
+	private void Awake ()
     {
         InitCharacter();
         ChangeState(StateNames.runState);
@@ -31,12 +31,22 @@ public class Character : MonoBehaviour {
         for (int index = 0; index <= 9; ++index)
 			Physics2D.IgnoreLayerCollision(10, index, false);
     }
+
+    private void Start()
+    {
+        TileRunner.instance.isMove = true;
+    }
 	
 	private void Update ()
     {
 #if UNITY_EDITOR
         DebugAction();
 #endif
+
+        if (transform.localPosition.y < -600f || transform.localPosition.x < -1100f)
+        {
+            GameManager.instance.GameEnd();
+        }
 
         if (_currentState != null)
             _currentState.Doing();
