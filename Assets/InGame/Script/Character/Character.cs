@@ -22,6 +22,9 @@ public class Character : MonoBehaviour {
         for (int i = 0; i < _states.Count; ++i)
             _states[i].Init();
 
+        for (int index = 0; index <= 9; ++index)
+			Physics2D.IgnoreLayerCollision(10, index, false);
+
         ChangeState(StateNames.runState);
 	}
 	
@@ -119,6 +122,11 @@ public class Character : MonoBehaviour {
         return hit.transform.localPosition.z.Equals(0f) ? false : true;
     }
 
+    public void Die()
+    {
+        ChangeState(StateNames.dieState);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         switch(other.tag)
@@ -131,7 +139,6 @@ public class Character : MonoBehaviour {
                 }
 
                 ChangeState(StateNames.clibState);
-                Debug.Log("커브 타일");
                 break;
 
             case "Tile":

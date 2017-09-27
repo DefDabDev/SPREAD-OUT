@@ -13,8 +13,6 @@ public class ClibState : State {
 	[SerializeField]
 	private bool _isClimb = false;
 
-	private bool _flag = false;
-
   	public override void Init()
     {
 		_state = STATE.SLEEP;
@@ -28,7 +26,6 @@ public class ClibState : State {
 		rigid2D.gravityScale = 0f;
 		StartCoroutine("OnToWall");
 		_isClimb = false;
-		_flag = false;
     }
 
     public override void ToChange()
@@ -74,7 +71,8 @@ public class ClibState : State {
 
 			if (!_character.IsPaintTile())
 			{
-				Debug.Log("Game Over");
+				_character.Die();
+				// Debug.Log("Game Over");
 			}
 		}
     }

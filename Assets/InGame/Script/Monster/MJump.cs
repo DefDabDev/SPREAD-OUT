@@ -5,7 +5,7 @@ using UnityEngine;
 public class MJump : Monster
 {
     [SerializeField]
-    Rigidbody2D rigidbody2D;
+    new Rigidbody2D rigidbody2D;
 
     void OnCollisionEnter2D(Collision2D coll)
     {

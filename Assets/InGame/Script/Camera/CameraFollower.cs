@@ -21,6 +21,9 @@ public class CameraFollower : MonoBehaviour {
 
 	private void Update()
 	{
+		if (_target.localPosition.y + _offsetY < _offsetY)
+			return;
+
 		Vector3 cameraPosition = new Vector3(transform.localPosition.x, _target.localPosition.y + _offsetY, transform.localPosition.z);
 		transform.localPosition = ALLerp.Lerp(transform.localPosition, cameraPosition, _smoothScale * Time.deltaTime);
 	}
