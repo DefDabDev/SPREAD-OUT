@@ -13,22 +13,36 @@ public class Character : MonoBehaviour {
     private List<State> _states;
 
     [SerializeField]
-    private string _currentStateName;
+    private string _currentStateName = string.Empty;
 
     private State _currentState = null;
 
 	void Awake ()
+    {
+        InitCharacter();
+        ChangeState(StateNames.runState);
+	}
+
+    private void InitCharacter()
     {
         for (int i = 0; i < _states.Count; ++i)
             _states[i].Init();
 
         for (int index = 0; index <= 9; ++index)
 			Physics2D.IgnoreLayerCollision(10, index, false);
-
-        ChangeState(StateNames.runState);
-	}
+    }
 	
-	void Update ()
+	private void Update ()
+    {
+#if UNITY_EDITOR
+        DebugAction();
+#endif
+
+        if (_currentState != null)
+            _currentState.Doing();
+	}
+
+    private void DebugAction()
     {
         if (Input.GetKeyDown(KeyCode.Space))
             ActionDown();
@@ -38,10 +52,7 @@ public class Character : MonoBehaviour {
 
         if (Input.GetKeyUp(KeyCode.Space))
             ActionUp();
-
-        if (_currentState != null)
-            _currentState.Doing();
-	}
+    }
 
     public State GetState(string name)
     {
@@ -72,38 +83,20 @@ public class Character : MonoBehaviour {
 
     public void ActionUp()
     {
-        if (IsPaintTile())
-        {
-            _currentState.PaintActionUp();
-        }
-        else
-        {
-            _currentState.NormalActionUp();
-        }
+        if (IsPaintTile()) _currentState.PaintActionUp();
+        else _currentState.NormalActionUp();
     }
 
     public void ActionPress()
     {
-        if (IsPaintTile())
-        {
-            _currentState.PaintActionPress();
-        }
-        else
-        {
-            _currentState.NormalActionPress();
-        }
+        if (IsPaintTile()) _currentState.PaintActionPress();
+        else _currentState.NormalActionPress();
     }
 
     public void ActionDown()
     {
-        if (IsPaintTile())
-        {
-            _currentState.PaintActionDown();
-        }
-        else
-        {
-            _currentState.NormalActionDown();
-        }
+        if (IsPaintTile()) _currentState.PaintActionDown();
+        else _currentState.NormalActionDown();
     }
 
     public bool IsPaintTile()
@@ -134,20 +127,15 @@ public class Character : MonoBehaviour {
             case "CurvTile":
                 
                 if (other.transform.localPosition.z < 1f)
-                {
-                    Debug.Log("Game Over");
-                }
+                    Die();
 
                 ChangeState(StateNames.clibState);
-                break;
-
-            case "Tile":
-                
                 break;
 
             default:
                 break;
         }
+
         _currentState.TriggerEnter(other);
     }
 

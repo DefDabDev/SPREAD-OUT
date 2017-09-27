@@ -9,6 +9,8 @@ public enum TILE_TYPE
 	CEILING,
 	CURVE_RIGHT,
 	CURVE_LEFT,
+	CURVE_RIGHT2,
+	CURVE_LEFT2,
 }
 
 public enum TILE_DIRECTION
@@ -72,6 +74,14 @@ public class Tile : MonoBehaviour {
             case TILE_TYPE.CURVE_LEFT:
                 _stickyPaint.SetPaint(PaintIndex.LEFT);
                 break;
+
+			case TILE_TYPE.CURVE_RIGHT2:
+				_stickyPaint.SetPaint(PaintIndex.RIGHT2);
+				break;
+
+			case TILE_TYPE.CURVE_LEFT2:
+				_stickyPaint.SetPaint(PaintIndex.LEFT2);
+				break;
         }
 
         switch (_direction)
@@ -94,7 +104,7 @@ public class Tile : MonoBehaviour {
 
 		switch(_type)
 		{
-			case TILE_TYPE.CURVE_LEFT: case TILE_TYPE.CURVE_RIGHT:
+			case TILE_TYPE.CURVE_RIGHT: case TILE_TYPE.CURVE_RIGHT2:
 				_collider.isTrigger = true;
 				gameObject.tag = "CurvTile";
 				_collider.size = new Vector2(_originTileSize.x + 10, _originTileSize.y + 10);

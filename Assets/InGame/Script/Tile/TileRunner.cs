@@ -28,4 +28,38 @@ public class TileRunner : ALComponentSingleton<TileRunner> {
 		// else
 			// _rigid2D.velocity = Vector2.zero;
 	}
+
+	public void Lerp(float x)
+	{
+		StartCoroutine("Lerping", transform.localPosition.x - x);
+	}
+
+	private IEnumerator Lerping(float x)
+	{
+		float timer = 0f;
+		while(timer <= 1f)
+		{
+			timer += Time.deltaTime;
+			transform.localPosition = ALLerp.Lerp(transform.localPosition, 
+										new Vector3(x, transform.localPosition.y, transform.localPosition.z), 
+										timer);
+			yield return null;
+		}
+	}
+
+	public void Lerp(Vector3 vector)
+	{
+		StartCoroutine("Lerping", transform.localPosition - vector);
+	}
+
+	private IEnumerator Lerping(Vector3 vector)
+	{
+		float timer = 0f;
+		while(timer <= 1f)
+		{
+			timer += Time.deltaTime;
+			transform.localPosition = ALLerp.Lerp(transform.localPosition, vector, timer);
+			yield return null;
+		}
+	}
 }

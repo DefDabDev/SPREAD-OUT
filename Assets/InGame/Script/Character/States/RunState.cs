@@ -56,6 +56,7 @@ public class RunState : State
         if (Physics2D.Raycast(transform.position + (Vector3.down * 1.2f), Vector3.down, _groundDisatance))
         {
             _isJump = false;
+            spriteAnimator.ChangeStateNotInit(StateNames.runState);
         }
         else
         {
@@ -134,7 +135,6 @@ public class RunState : State
     {
         if (other.gameObject.tag.Equals("Tile"))
         {
-            spriteAnimator.ChangeState(StateNames.runState);
         }
     }
 
@@ -145,7 +145,6 @@ public class RunState : State
             if (_isIn)
             {
                 StartCoroutine("Out");
-                Debug.Log(other.transform.localPosition);
             }
         }
     }
