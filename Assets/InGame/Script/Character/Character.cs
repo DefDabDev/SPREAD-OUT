@@ -17,8 +17,11 @@ public class Character : MonoBehaviour {
 
     private State _currentState = null;
 
+    public bool isAttacking {set;get;}
+
 	private void Awake ()
     {
+        isAttacking = false;
         InitCharacter();
         ChangeState(StateNames.runState);
 	}
@@ -142,6 +145,11 @@ public class Character : MonoBehaviour {
                 ChangeState(StateNames.clibState);
                 break;
 
+            case "Monster":
+                if (!isAttacking)
+                    Die();
+                return;
+
             default:
                 break;
         }
@@ -161,6 +169,14 @@ public class Character : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        switch(other.gameObject.tag)
+        {
+            case "Monster":
+                if (!isAttacking)
+                    Die();
+                return;
+        }
+
         _currentState.CollisionEnter(other);
     }
 
