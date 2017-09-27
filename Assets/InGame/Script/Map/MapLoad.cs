@@ -90,9 +90,9 @@ public class MapLoad : MonoBehaviour
                         else if (s.Equals("3"))
                             obj.SendMessage("typeChange", TILE_TYPE.CURVE_LEFT);
                         else if (s.Equals("1"))
-                            obj.SendMessage("typeChange", TILE_TYPE.CURVE_RIGHT);
+                            obj.SendMessage("typeChange", TILE_TYPE.CURVE_RIGHT2);
                         else if (s.Equals("2"))
-                            obj.SendMessage("typeChange", TILE_TYPE.CURVE_LEFT);
+                            obj.SendMessage("typeChange", TILE_TYPE.CURVE_LEFT2);
                         else if (s.Equals("5") || s.Equals("8") || s.Equals("y"))
                             obj.SendMessage("directionChange", TILE_DIRECTION.RIGHT);
                         else if (s.Equals("6") || s.Equals("x") || s.Equals("z"))

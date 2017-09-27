@@ -10,6 +10,8 @@ public enum PaintIndex
 	FLOOR,
 	RIGHT,
 	LEFT,
+	RIGHT2,
+	LEFT2,
 }
 
 public class StickyPaint : MonoBehaviour {
@@ -20,6 +22,9 @@ public class StickyPaint : MonoBehaviour {
 	[SerializeField]
 	private Image _image = null;
 
+	[SerializeField]
+	private bool _isTriangle = false;
+
 	private void OnDisable ()
 	{
 		_image.fillAmount = 0f;
@@ -28,9 +33,10 @@ public class StickyPaint : MonoBehaviour {
 	public void SetPaint(PaintIndex index)
 	{
 		gameObject.SetActive(true);
-		_image.sprite = _images[(int)index];
+		if (!_isTriangle)
+			_image.sprite = _images[(int)index];
 		StartCoroutine("PaintingAnimation");
-	}	
+	}
 
 	public void SetPaintRotation(float rotation)
     {

@@ -46,6 +46,20 @@ public class SpriteAnimator : MonoBehaviour {
         ALLog.ErrorLog(string.Format("Can't find state! : {0}", name));
     }
 
+    public void ChangeStateNotInit(string name)
+    {
+        for (int i = 0; i < _animationState.Count; ++i)
+        {
+            if (_animationState[i].name.Equals(name))
+            {
+                _currentAnimation = _animationState[i];
+                return;
+            }
+        }
+
+        ALLog.ErrorLog(string.Format("Can't find state! : {0}", name));
+    }
+
     private void Update()
     {
         if (_currentAnimation == null)

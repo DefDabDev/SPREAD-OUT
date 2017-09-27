@@ -16,15 +16,12 @@ public class CameraFollower : MonoBehaviour {
 	private void Start()
 	{
 		_offsetY = transform.localPosition.y - _target.localPosition.y;
-		Debug.Log(_offsetY);
 	}
 
 	private void Update()
 	{
-		if (_target.localPosition.y + _offsetY < _offsetY)
-			return;
-
-		Vector3 cameraPosition = new Vector3(transform.localPosition.x, _target.localPosition.y + _offsetY, transform.localPosition.z);
+		float y = (_target.localPosition.y + _offsetY) <= 0f ? 0f : (_target.localPosition.y + _offsetY);
+		Vector3 cameraPosition = new Vector3(transform.localPosition.x, y, transform.localPosition.z);
 		transform.localPosition = ALLerp.Lerp(transform.localPosition, cameraPosition, _smoothScale * Time.deltaTime);
 	}
 }

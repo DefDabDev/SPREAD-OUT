@@ -14,14 +14,15 @@ public class PunchState : State
     public override void Init()
     {
 		_state = STATE.SLEEP;
-        _stateName = StateNames.runState;
+        _stateName = StateNames.punchState;
 		_star.gameObject.SetActive(false);
     }
 
     public override void OnChange()
     {
-		_state = STATE.SLEEP;
-        _stateName = StateNames.runState;
+		_state = STATE.RUN;
+		spriteAnimator.ChangeState(StateNames.punchState);
+		StartCoroutine("Blink");
     }
 
     public override void ToChange()
@@ -32,7 +33,7 @@ public class PunchState : State
 
 	public override void Doing()
     {
-
+		
     }
 
 	private IEnumerator Blink()
