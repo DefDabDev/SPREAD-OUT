@@ -1,6 +1,9 @@
 
 # Created by https://www.gitignore.io/api/unity,macos,visualstudio,visualstudiocode
 
+### key ###
+user.keysotre
+
 ### macOS ###
 *.DS_Store
 .AppleDouble

@@ -24,9 +24,9 @@ public class Monster : MonoBehaviour
 
     [Header("Animation")]
     [SerializeField]
-    UnityEngine.UI.Image _image;
+    protected UnityEngine.UI.Image _image;
     [SerializeField]
-    Sprite[] flip;
+    protected Sprite[] flip;
     /* Animation flip 규칙
      *   [0] 걷기_0
      *   [1] 걷기_1
@@ -109,6 +109,8 @@ public class Monster : MonoBehaviour
             // 공격 맞음 !
             if (isChgColor)
             {
+                if (!helmet.Equals(null))
+                    helmet.SetActive(false);
                 _image.sprite = flip[3];
                 gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
                 gameObject.GetComponent<BoxCollider2D>().enabled = false;

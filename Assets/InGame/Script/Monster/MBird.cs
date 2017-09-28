@@ -18,6 +18,24 @@ public class MBird : Monster
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag.CompareTo("Paint").Equals(0))
+        {
+            if (isChgColor)
+                return;
+            
+            isChgColor = true;
+            hitPaint();
+
+            StopCoroutine("walkingAnimation");
+            StopCoroutine("walkingStatus");
+
+            _image.sprite = flip[2];
+            other.gameObject.SetActive(false);
+        }
+    }
+
     protected override void hitPaint()
     {
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 2;

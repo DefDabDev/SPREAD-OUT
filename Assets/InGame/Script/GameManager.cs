@@ -12,6 +12,8 @@ public class GameManager : ALComponentSingleton<GameManager>
     [SerializeField]
     UnityEngine.UI.Text timeTxt;
     [SerializeField]
+    UnityEngine.UI.Text resultTxt;
+    [SerializeField]
     Animator anim;
 
     void Awake()
@@ -41,6 +43,8 @@ public class GameManager : ALComponentSingleton<GameManager>
     /// </summary>
     public void GameEnd()
     {
+        StopCoroutine("timeCheck");
+        resultTxt.text= string.Format("{0:000} M", playTime);
         anim.SetTrigger("GameEnd");
         PlayerPrefs.SetInt("score", playTime);
     }
